@@ -6,15 +6,15 @@ import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class LoggingAspect {
-    @Before("allGetMethods()")
+    @Before("allGetMethods() && allCircleMethods()")
     public void loggingAllGetMethodsAdvice(){
         System.out.println("All get methods advice.");
     }
 
-    @Before("allCircleMethods()")
-    public void loggingAllCircleMethods(){
-        System.out.println("All Circle class Methods");
-    }
+//    @Before("allCircleMethods()")
+//    public void loggingAllCircleMethods(){
+//        System.out.println("All Circle class Methods");
+//    }
 
     @Pointcut("execution(* *.get*())")
     public void allGetMethods(){}
