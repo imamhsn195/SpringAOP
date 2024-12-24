@@ -6,6 +6,7 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <aop:aspectj-autoproxy/>
     <bean id="triangle" class="models.Triangle">
         <property name="name">
             <value>Triangle Name</value>
@@ -17,4 +18,5 @@
         </property>
     </bean>
     <bean id="shapeService" class="services.ShapeService" autowire="byName"/>
+    <bean id="loggingAspect" class="aspects.LoggingAspect"/>
 </beans>
