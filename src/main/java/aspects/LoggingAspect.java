@@ -6,22 +6,19 @@ import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class LoggingAspect {
-    @Before("allModelsGet()")
-    public void loggingModelAdvice(){
-        System.out.println("First advice of models");
+    @Before("allGetMethods() && allCircleMethods()")
+    public void loggingAllGetMethodsAdvice(){
+        System.out.println("All get methods advice.");
     }
-    @Before("allModelsGet()")
-    public void loggingModelSecondAdvice(){
-        System.out.println("Second advice of models");
-    }
-    @Before("allServiceGet()")
-    public void loggingServiceAdvice(){
-        System.out.println("First advice of shapeService class");
-    }
+
+//    @Before("allCircleMethods()")
+//    public void loggingAllCircleMethods(){
+//        System.out.println("All Circle class Methods");
+//    }
 
     @Pointcut("execution(* *.get*())")
-    public void allModelsGet(){}
+    public void allGetMethods(){}
 
-    @Pointcut("execution(* services.ShapeService.get*())")
-    public void allServiceGet(){}
+    @Pointcut("within(models.Circle)")
+    public void allCircleMethods(){}
 }
