@@ -1,24 +1,25 @@
 package aspects;
 
-import models.Circle;
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class LoggingAspect {
-   @Before("allMethodsCircle()")
-    public void adviceAllMethodCircle(JoinPoint joinPoint){
-//       Circle circle = (Circle) joinPoint.getTarget();
-//       System.out.println(joinPoint.getTarget());
-   }
-
-   @Before("args(name)")
+   @After("args(name)")
    public void stringArgumentMethods(String name){
-       System.out.println("Advice printed that takes String arguments " + name);
+       System.out.println("After advice called. " + name);
    }
 
-   @Pointcut("within(models.Circle)")
-    public void allMethodsCircle(){}
+   @AfterReturning(pointcut = "args(name)", returning = "returningString")
+    public void returningStringMethod(String name, String returningString){
+       System.out.println("AfterReturning advice called. " + returningString);
+   }
+
+   @AfterThrowing(pointcut = "args(name)", throwing = "ex")
+   public void throwingException(String name, Exception ex){
+      System.out.println("AfterThrowing exception advice called." + ex);
+   }
+
 }
